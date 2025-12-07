@@ -9,7 +9,7 @@ pipeline {
 	    APP_NAME = "register-app"
         RELEASE = "1.0.0"
         DOCKER_USER = "mohamedahmedalakhdar"     
-        DOCKER_PASS = credentials('dockerhub')
+        DOCKER_PASS = "dockerhub"
         IMAGE_NAME = "${DOCKER_USER}" + "/" + "${APP_NAME}"
         IMAGE_TAG = "${RELEASE}-${BUILD_NUMBER}"
 	    }
@@ -44,7 +44,7 @@ pipeline {
         stage("Build & Push Docker Image") {
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io/v1',DOCKER_PASS) {
+                    docker.withRegistry('',DOCKER_PASS) {
                         docker_image = docker.build "${IMAGE_NAME}"
                     }
 
